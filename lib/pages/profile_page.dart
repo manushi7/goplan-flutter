@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/pages/login_page.dart';
-import 'package:flutter_login_ui/pages/splash_screen.dart';
+import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 
 import 'forgot_password_page.dart';
@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage>{
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0.5,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme:IconThemeData(color: Colors.white),
         flexibleSpace:Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -89,9 +89,9 @@ class _ProfilePageState extends State<ProfilePage>{
               ),
               ListTile(
                 leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Colors.black,),
-                title: Text('Splash Screen', style: TextStyle(fontSize: 17, color: Colors.black),),
+                title: Text('Home Page', style: TextStyle(fontSize: 17, color: Colors.black),),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                 },
               ),
               ListTile(
@@ -197,8 +197,8 @@ class _ProfilePageState extends State<ProfilePage>{
                                           contentPadding: EdgeInsets.symmetric(
                                               horizontal: 12, vertical: 4),
                                           leading: Icon(Icons.my_location),
-                                          title: Text("Location"),
-                                          subtitle: Text("Nepal"),
+                                          title: Text("EmployementStatus"),
+                                          subtitle: Text("student"),
                                         ),
                                         ListTile(
                                           leading: Icon(Icons.email),
@@ -212,9 +212,9 @@ class _ProfilePageState extends State<ProfilePage>{
                                         ),
                                         ListTile(
                                           leading: Icon(Icons.person),
-                                          title: Text("About Me"),
+                                          title: Text("Date of Birth"),
                                           subtitle: Text(
-                                              "This is a about me link and you can khow about me in this section."),
+                                              "2001/08/28"),
                                         ),
                                       ],
                                     ),

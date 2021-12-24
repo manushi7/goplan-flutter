@@ -4,6 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/common/theme_helper.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+
 
 
 class HomePage extends StatefulWidget{
@@ -11,14 +13,50 @@ class HomePage extends StatefulWidget{
 
   @override
   _HomePageState createState() => _HomePageState();
+  
 }
 
+class PieData {
+  PieData(this.activity, this.time);
+    String activity;
+    double time;
+    
+}
 
 
 class _HomePageState extends State<HomePage>{
   double _headerHeight = 150;
   Key _formKey = GlobalKey<FormState>();
   int _selectedIndex = 0;
+  late List<charts.Series<PieData, String>> _pieData;
+
+  @override void initState() {
+    super.initState();
+    _pieData = <charts.Series<PieData, String>>[];
+}
+
+    generateData() {
+        var piedata = [
+            new PieData('Work', 35.8),
+            new PieData('Eat', 8.3),
+            new PieData('Commute', 10.8),
+            new PieData('TV', 15.6),
+            new PieData('Sleep', 19.2),
+            new PieData('Other', 10.3),
+        ];
+    _pieData.add(
+        charts.Series(
+            domainFn: (PieData data, _) => data.activity,
+            measureFn: (PieData data, _) => data.time,
+            id: 'Time spent',
+            data: piedata,
+            labelAccessorFn: (PieData row, _) => '${row.activity}',
+        ),
+    );
+    return _pieData;
+}
+
+     
 
   @override
   Widget build(BuildContext context) {
@@ -99,3 +137,4 @@ class _HomePageState extends State<HomePage>{
     );
   }
 }
+
