@@ -2,13 +2,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_ui/pages/login_page.dart';
+import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 
-import 'forgot_password_page.dart';
+import 'achievement_page.dart';
 import 'forgot_password_verification_page.dart';
-import 'registration_page.dart';
+import 'settings.dart';
 
 class ProfilePage extends StatefulWidget{
 
@@ -96,26 +96,26 @@ class _ProfilePageState extends State<ProfilePage>{
               ),
               ListTile(
                 leading: Icon(Icons.login_rounded,size: _drawerIconSize,color: Colors.black),
-                title: Text('Login Page', style: TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                title: Text('Your Goals', style: TextStyle(fontSize: _drawerFontSize, color: Colors.black),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Goal()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
-                title: Text('Registration Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text('Settings ',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Colors.black,),
-                title: Text('Forgot Password Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text('Achievement page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => ForgotPasswordPage()),);
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => CardDesign()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
