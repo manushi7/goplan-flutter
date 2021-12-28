@@ -2,11 +2,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_ui/pages/login_page.dart';
+import 'goals_page.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
-
-import 'forgot_password_page.dart';
+import 'achievement_page.dart';
 import 'forgot_password_verification_page.dart';
 import 'registration_page.dart';
 
@@ -96,10 +95,10 @@ class _ProfilePageState extends State<ProfilePage>{
               ),
               ListTile(
                 leading: Icon(Icons.login_rounded,size: _drawerIconSize,color: Colors.black),
-                title: Text('Login Page', style: TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                title: Text('my goals', style: TextStyle(fontSize: _drawerFontSize, color: Colors.black),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Goal()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
@@ -113,9 +112,9 @@ class _ProfilePageState extends State<ProfilePage>{
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Colors.black,),
-                title: Text('Forgot Password Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text(' my achievements',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => ForgotPasswordPage()),);
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => CardDesign()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),

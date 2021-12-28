@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import 'package:flutter_alert/flutter_alert.dart';
 import 'pages/splash_screen.dart';
 
 void main() {

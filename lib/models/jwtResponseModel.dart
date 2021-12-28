@@ -8,7 +8,7 @@ JwtResponse jwtResponseFromJson(String str) =>
 String jwtResponseToJson(JwtResponse data) => json.encode(data.toJson());
 
 class JwtResponse {
-  JwtResponse({this.access_token});
+  JwtResponse({this.access_token="a"});
   String? access_token;
   bool? success;
   String? msg;
