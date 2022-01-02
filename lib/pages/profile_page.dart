@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,17 +9,15 @@ import 'achievement_page.dart';
 import 'forgot_password_verification_page.dart';
 import 'settings.dart';
 
-class ProfilePage extends StatefulWidget{
-
+class ProfilePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-     return _ProfilePageState();
+    return _ProfilePageState();
   }
 }
 
-class _ProfilePageState extends State<ProfilePage>{
-
-  double  _drawerIconSize = 24;
+class _ProfilePageState extends State<ProfilePage> {
+  double _drawerIconSize = 24;
   double _drawerFontSize = 17;
 
   @override
@@ -28,23 +25,28 @@ class _ProfilePageState extends State<ProfilePage>{
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Profile Page",
+        title: Text(
+          "Profile Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0.5,
-        iconTheme:IconThemeData(color: Colors.white),
-        flexibleSpace:Container(
+        iconTheme: IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-              )
-          ),
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).accentColor,
+              ])),
         ),
         actions: [
           Container(
-            margin: EdgeInsets.only( top: 16, right: 16,),
+            margin: EdgeInsets.only(
+              top: 16,
+              right: 16,
+            ),
             child: Stack(
               children: <Widget>[
                 Icon(Icons.notifications),
@@ -52,9 +54,22 @@ class _ProfilePageState extends State<ProfilePage>{
                   right: 0,
                   child: Container(
                     padding: EdgeInsets.all(1),
-                    decoration: BoxDecoration( color: Colors.red, borderRadius: BorderRadius.circular(6),),
-                    constraints: BoxConstraints( minWidth: 12, minHeight: 12, ),
-                    child: Text( '5', style: TextStyle(color: Colors.white, fontSize: 8,), textAlign: TextAlign.center,),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    constraints: BoxConstraints(
+                      minWidth: 12,
+                      minHeight: 12,
+                    ),
+                    child: Text(
+                      '5',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 8,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 )
               ],
@@ -64,10 +79,9 @@ class _ProfilePageState extends State<ProfilePage>{
       ),
       drawer: Drawer(
         child: Container(
-          decoration:BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.white,
-              
-          ) ,
+          ),
           child: ListView(
             children: [
               DrawerHeader(
@@ -77,59 +91,120 @@ class _ProfilePageState extends State<ProfilePage>{
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     stops: [0.0, 1.0],
-                    colors: [ Theme.of(context).primaryColor,Theme.of(context).accentColor,],
+                    colors: [
+                      Theme.of(context).primaryColor,
+                      Theme.of(context).accentColor,
+                    ],
                   ),
                 ),
                 child: Container(
                   alignment: Alignment.bottomLeft,
-                  child: Text("Your Go Plans",
-                    style: TextStyle(fontSize: 25,color: Colors.white, fontWeight: FontWeight.bold),
+                  child: Text(
+                    "Your Go Plans",
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Colors.black,),
-                title: Text('Home Page', style: TextStyle(fontSize: 17, color: Colors.black),),
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.login_rounded,size: _drawerIconSize,color: Colors.black),
-                title: Text('Your Goals', style: TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                leading: Icon(
+                  Icons.screen_lock_landscape_rounded,
+                  size: _drawerIconSize,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Home Page',
+                  style: TextStyle(fontSize: 17, color: Colors.black),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Goal()),);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
                 },
               ),
-              //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
-                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
-                title: Text('Settings ',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                leading: Icon(Icons.login_rounded,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Your Goals',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()),);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Goal()),
+                  );
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
-                leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Colors.black,),
-                title: Text('Achievement page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                leading: Icon(Icons.person_add_alt_1,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Settings ',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => CardDesign()),);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                  );
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
-                leading: Icon(Icons.verified_user_sharp, size: _drawerIconSize,color: Colors.black,),
-                title: Text('Verification Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                leading: Icon(
+                  Icons.password_rounded,
+                  size: _drawerIconSize,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Achievement page',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => ForgotPasswordVerificationPage()), );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CardDesign()),
+                  );
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
-                leading: Icon(Icons.logout_rounded, size: _drawerIconSize,color: Colors.black,),
-                title: Text('Logout',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                leading: Icon(
+                  Icons.verified_user_sharp,
+                  size: _drawerIconSize,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Verification Page',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ForgotPasswordVerificationPage()),
+                  );
+                },
+              ),
+              //Divider(color: Theme.of(context).primaryColor, height: 1,),
+              ListTile(
+                leading: Icon(
+                  Icons.logout_rounded,
+                  size: _drawerIconSize,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Logout',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
                 onTap: () {
                   SystemNavigator.pop();
                 },
@@ -141,7 +216,10 @@ class _ProfilePageState extends State<ProfilePage>{
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            Container(height: 100, child: HeaderWidget(100,false,Icons.house_rounded),),
+            Container(
+              height: 100,
+              child: HeaderWidget(100, false, Icons.house_rounded),
+            ),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.fromLTRB(25, 10, 25, 10),
@@ -155,22 +233,43 @@ class _ProfilePageState extends State<ProfilePage>{
                       border: Border.all(width: 5, color: Colors.white),
                       color: Colors.white,
                       boxShadow: [
-                        BoxShadow(color: Colors.black12, blurRadius: 100, offset: const Offset(5, 5),),
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 100,
+                          offset: const Offset(5, 5),
+                        ),
                       ],
                     ),
-                    child: Icon(Icons.person, size: 80, color: Colors.grey.shade300,),
+                    child: Icon(
+                      Icons.person,
+                      size: 80,
+                      color: Colors.grey.shade300,
+                    ),
                   ),
-                  SizedBox(height: 20,),
-                  Text('Manushi Khadka', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                  SizedBox(height: 20,),
-                  Text('student', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Manushi Khadka',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'student',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     padding: EdgeInsets.all(10),
                     child: Column(
                       children: <Widget>[
                         Container(
-                          padding: const EdgeInsets.only(left: 8.0, bottom: 4.0),
+                          padding:
+                              const EdgeInsets.only(left: 8.0, bottom: 4.0),
                           alignment: Alignment.topLeft,
                           child: Text(
                             "User Information",
@@ -203,7 +302,8 @@ class _ProfilePageState extends State<ProfilePage>{
                                         ListTile(
                                           leading: Icon(Icons.email),
                                           title: Text("Email"),
-                                          subtitle: Text("manushi123@gmail.com"),
+                                          subtitle:
+                                              Text("manushi123@gmail.com"),
                                         ),
                                         ListTile(
                                           leading: Icon(Icons.phone),
@@ -213,8 +313,7 @@ class _ProfilePageState extends State<ProfilePage>{
                                         ListTile(
                                           leading: Icon(Icons.person),
                                           title: Text("Date of Birth"),
-                                          subtitle: Text(
-                                              "2001/08/28"),
+                                          subtitle: Text("2001/08/28"),
                                         ),
                                       ],
                                     ),
@@ -235,5 +334,4 @@ class _ProfilePageState extends State<ProfilePage>{
       ),
     );
   }
-
 }
