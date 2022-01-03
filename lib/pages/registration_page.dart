@@ -20,6 +20,21 @@ class _RegistrationPageState extends State<RegistrationPage>{
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
+  late TextEditingController _firstnameController;
+  late TextEditingController _passwordController;
+  late TextEditingController _numberController;
+  late TextEditingController _emailController;
+
+
+
+   @override
+  void initState() {
+    super.initState();
+    _firstnameController = TextEditingController();
+    _passwordController = TextEditingController();
+    _numberController = TextEditingController();
+    _emailController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +95,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
                         SizedBox(height: 30,),
                         Container(
                           child: TextFormField(
+                            controller: _firstnameController,
                             decoration: ThemeHelper().textInputDecoration('First Name', 'Enter your first name'),
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
@@ -94,6 +110,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
+                            controller: _emailController,
                             decoration: ThemeHelper().textInputDecoration("E-mail address", "Enter your email"),
                             keyboardType: TextInputType.emailAddress,
                             validator: (val) {
@@ -108,6 +125,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
+                            controller: _numberController,
                             decoration: ThemeHelper().textInputDecoration(
                                 "Mobile Number",
                                 "Enter your mobile number"),
@@ -124,8 +142,10 @@ class _RegistrationPageState extends State<RegistrationPage>{
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
+                            controller: _passwordController,
                             obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
+                                
                                 "Password*", "Enter your password"),
                             validator: (val) {
                               if (val!.isEmpty) {

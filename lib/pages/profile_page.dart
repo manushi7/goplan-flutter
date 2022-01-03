@@ -6,7 +6,7 @@ import 'goals_page.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 import 'achievement_page.dart';
-import 'forgot_password_verification_page.dart';
+import 'friendslist_page.dart';
 import 'registration_page.dart';
 
 class ProfilePage extends StatefulWidget{
@@ -21,6 +21,8 @@ class _ProfilePageState extends State<ProfilePage>{
 
   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
+  
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +122,9 @@ class _ProfilePageState extends State<ProfilePage>{
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.verified_user_sharp, size: _drawerIconSize,color: Colors.black,),
-                title: Text('Verification Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text('Friends Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => ForgotPasswordVerificationPage()), );
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => FriendsListPage()), );
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),

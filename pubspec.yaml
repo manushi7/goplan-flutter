@@ -37,7 +37,7 @@ dependencies:
   get: ^4.6.1
   http: ^0.13.4
   flutter_alert: ^0.4.0
-
+  table_calendar: ^3.0.3
 
 dev_dependencies:
   flutter_test:

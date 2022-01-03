@@ -1,30 +1,14 @@
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_ui/common/theme_helper.dart';
-import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:table_calendar/table_calendar.dart';
-
 
 import '../utils.dart';
 
-
-
-class HomePage extends StatefulWidget{
-  const HomePage({Key? key}): super(key:key);
-
+class TableEventsExample extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
-  
+  _TableEventsExampleState createState() => _TableEventsExampleState();
 }
 
-
-class _HomePageState extends State<HomePage>{
-  double _headerHeight = 150;
-  Key _formKey = GlobalKey<FormState>();
-  int _selectedIndex = 1;
+class _TableEventsExampleState extends State<TableEventsExample> {
   late final ValueNotifier<List<Event>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
@@ -34,8 +18,7 @@ class _HomePageState extends State<HomePage>{
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
 
-
-   @override
+  @override
   void initState() {
     super.initState();
 
@@ -99,14 +82,9 @@ class _HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Hello Manushi'),
-        backgroundColor: Colors.lightBlue,
-        
+        title: Text('TableCalendar - Events'),
       ),
-      
-      
       body: Column(
         children: [
           TableCalendar<Event>(
@@ -166,109 +144,6 @@ class _HomePageState extends State<HomePage>{
           ),
         ],
       ),
-      );
-
-//card view code down here
-  body:Card(
-          child:Container(
-            height: 100,
-            color: Colors.white,
-            child: Row(
-              children: [
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Expanded(
-                      child:Image.asset("assets/images/shape_of_you.png"),
-                      flex:2 ,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child:Container(
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: ListTile(
-                            title: Text("Shape Of You"),
-                            subtitle: Text("Ed Sheeran"),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton(
-                                child:Text("PLAY"),
-                                onPressed: ()
-                                {},
-                              ),
-                              SizedBox(width: 8,),
-                              TextButton(
-                                child: Text("ADD TO QUEUE"),
-                                onPressed: (){},
-                              ),
-                              SizedBox(width: 8,)
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  flex:8 ,
-                ),
-              ],
-            ),
-          ),
-          elevation: 8,
-          margin: EdgeInsets.all(10),
-        );
-    
+    );
   }
 }
-
-  
-
-  @override
-  Widget build(BuildContext context) {
-
-    var _selectedIndex;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-           //New
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.badge_rounded),
-            label: 'Goals',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Friends',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-            backgroundColor: Colors.white,
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.blue,
-      ),
-      
-    );
-    
-  }
-
-

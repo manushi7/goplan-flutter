@@ -17,6 +17,16 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
+  late TextEditingController _emailController;
+  
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +88,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           children: <Widget>[
                             Container(
                               child: TextFormField(
+                                controller: _emailController,
                                 decoration: ThemeHelper().textInputDecoration("Email", "Enter your email"),
                                 validator: (val){
                                   if(val!.isEmpty){
