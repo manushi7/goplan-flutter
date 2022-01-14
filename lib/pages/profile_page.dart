@@ -1,13 +1,18 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_login_ui/core/services/apiService.dart';
+import 'package:flutter_login_ui/models/profileModel.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/home_page.dart';
+import 'package:flutter_login_ui/pages/login_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'achievement_page.dart';
 import 'forgot_password_verification_page.dart';
 import 'settings.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -17,8 +22,45 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String fullName = '';
+  String email = '';
   double _drawerIconSize = 24;
   double _drawerFontSize = 17;
+  late Future<UserProfile> _futureUserProfile;
+
+  @override
+  void initState() {
+    super.initState();
+    print("Hee");
+    getProfile();
+  }
+
+  Future getProfile() async {
+    print("Hittingggg");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    var jsonResponse;
+    print(token);
+    var response = await http.get(
+        Uri.parse('https://go-plan.herokuapp.com/api/user/profile'),
+        headers: {"Authorization": token != null ? token : ''});
+    if (response.statusCode == 200) {
+      jsonResponse = json.decode(response.body);
+      print(jsonResponse);
+
+      setState(() {
+        fullName = jsonResponse.fullName;
+        email = jsonResponse['email'];
+      });
+      print(fullName);
+    } else if (response.statusCode == 401) {
+      print(response.statusCode);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    } else {
+      print(response.body);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +292,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 20,
                   ),
                   Text(
-                    'Manushi Khadka',
+                    fullName,
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -302,8 +344,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ListTile(
                                           leading: Icon(Icons.email),
                                           title: Text("Email"),
-                                          subtitle:
-                                              Text("manushi123@gmail.com"),
+                                          subtitle: Text(email),
                                         ),
                                         ListTile(
                                           leading: Icon(Icons.phone),

@@ -1,25 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/common/theme_helper.dart';
 import 'package:flutter_login_ui/core/services/apiService.dart';
+import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/models/userModel.dart';
 import 'package:flutter_login_ui/models/jwtResponseModel.dart';
 import 'package:flutter_alert/flutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'forgot_password_page.dart';
 import 'profile_page.dart';
 import 'registration_page.dart';
 import 'widgets/header_widget.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-GoogleSignIn _googleSignIn = GoogleSignIn(
-  // Optional clientId
-  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
-  scopes: <String>[
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ],
-);
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,6 +25,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isLoading = false;
   double _headerHeight = 250;
   Key _formKey = GlobalKey<FormState>();
   late TextEditingController _emailController;
@@ -39,6 +36,36 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+  }
+
+  signIn(String email, pass) async {
+    print("Catchhh");
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Map data = {'email': email, 'password': pass};
+    var jsonResponse = null;
+
+    var response = await http.post(
+        Uri.parse("https://go-plan.herokuapp.com/api/user/login"),
+        body: data);
+    print(response);
+    if (response.statusCode == 201) {
+      jsonResponse = json.decode(response.body);
+      if (response.statusCode == 201) {
+        setState(() {
+          _isLoading = false;
+        });
+        print(jsonResponse['access_token']);
+        sharedPreferences.setString(
+            "token", 'Bearer' + ' ' + jsonResponse['access_token']);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => ProfilePage()));
+      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      print(response.body);
+    }
   }
 
   @override
@@ -132,27 +159,16 @@ class _LoginPageState extends State<LoginPage> {
                                           color: Colors.white),
                                     ),
                                   ),
-                                  onPressed: () async {
-                                    await ApiService()
-                                        .loginUser(User(
-                                            email: _emailController.text,
-                                            password: _passwordController.text))
-                                        .then((data) {
-                                      if (data.access_token!.isNotEmpty) {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProfilePage()));
-                                      } else {
-                                        showAlert(
-                                            context: context, title: data.msg);
-                                      }
-                                      ;
-                                    });
-
-                                    //After successful login we will redirect to profile page. Let's create profile page now
-                                  },
+                                  onPressed: _emailController.text == "" ||
+                                          _passwordController.text == ""
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            _isLoading = true;
+                                          });
+                                          signIn(_emailController.text,
+                                              _passwordController.text);
+                                        },
                                 ),
                               ),
                               Container(

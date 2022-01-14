@@ -19,12 +19,13 @@ class ApiService {
 
   Future<JwtResponse> loginUser(User user) async {
     final request = await http.post(
-        Uri.parse('http://localhost:3000/api/user/login'),
+        Uri.parse('https://go-plan.herokuapp.com/api/user/login'),
         headers: {"Content-type": "application/json"},
         body: jsonEncode(user.toJson()));
     JwtResponse jwtResponse = JwtResponse();
     try {
       if (request.statusCode == 201) {
+        print(request.body);
         jwtResponse = jwtResponseFromJson(request.body);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String token = jwtResponse.access_token;
@@ -33,28 +34,27 @@ class ApiService {
         return JwtResponse();
       }
     } catch (e) {
+      print(e);
       return JwtResponse();
     }
     return jwtResponse;
   }
 
   Future<UserProfile> getProfile() async {
+    print("Hitting");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('jwt');
-    final request = await http
-        .get(Uri.parse('http://localhost:3000/api/user/profile'), headers: {
-      "Content-Type:": "application/json",
-      "Authorization": token != null ? token : ''
-    });
+    final request = await http.get(
+        Uri.parse('https://go-plan.herokuapp.com/api/user/profile'),
+        headers: {"Authorization": token != null ? token : ''});
     UserProfile userProfile = UserProfile();
-    try {
-      if (request.statusCode == 200) {
-        userProfile = userProfileResponseFromJson(request.body);
-        return userProfile;
-      }
-    } catch (err) {
-      throw err;
+    if (request.statusCode == 200) {
+      userProfile = json.decode(request.body);
+      print(userProfile);
+      return userProfile;
+    } else {
+      print(request.statusCode);
+      throw Exception("Errorfdfd");
     }
-    return userProfile;
   }
 }
