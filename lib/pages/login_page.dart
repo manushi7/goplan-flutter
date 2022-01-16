@@ -193,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
     child: const Text("you have logged in successfully"),
     onPressed: () {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomePage()));
+          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
     },
   );
 

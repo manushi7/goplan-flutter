@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/pages/friend.dart';
 import 'goals_page.dart';
-import 'package:flutter_login_ui/home_page.dart';
+import '../home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 import 'achievement_page.dart';
 import 'registration_page.dart';
@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage>{
                 leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Colors.black,),
                 title: Text('Home Page', style: TextStyle(fontSize: 17, color: Colors.black),),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
               ),
               ListTile(
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage>{
                 title: Text('my goals', style: TextStyle(fontSize: _drawerFontSize, color: Colors.black),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Goal()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => GoalScreen()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),

@@ -37,8 +37,8 @@ dependencies:
   get: ^4.6.1
   http: ^0.13.4
   rflutter_alert: ^2.0.4
+  smooth_page_indicator: ^1.0.0+2
   table_calendar: ^3.0.3
-  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_test:
