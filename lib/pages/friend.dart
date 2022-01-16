@@ -1,41 +1,76 @@
-import 'dart:convert';
-import 'package:meta/meta.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Friend {
-  Friend({
-    required this.avatar,
-    required this.name,
-    required this.email,
-    required this.location,
-  });
+class FriendPage extends StatefulWidget {
+  const FriendPage({ Key? key }) : super(key: key);
 
-  final String avatar;
-  final String name;
-  final String email;
-  final String location;
+  @override
+  _freindPageState createState() => _freindPageState();
+}
 
-  static List<Friend> allFromResponse(String response) {
-    var decodedJson = json.decode(response).cast<String, dynamic>();
+class _freindPageState extends State<FriendPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+     appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: const Text("My Friends"),
+      ),
+      body: Container(
+        child: ListView.builder(
+          
+                    padding: const EdgeInsets.only(
+                        left: 8, right: 8, top: 25),
 
-    return decodedJson['results']
-        .cast<Map<String, dynamic>>()
-        .map((obj) => Friend.fromMap(obj))
-        .toList()
-        .cast<Friend>();
-  }
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                  itemCount:10,
+                  itemBuilder: (BuildContext context, int index){
+                    return Container(
+                      margin: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.120,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.grey[200],
+                        boxShadow: const [
+                          BoxShadow(
+                              offset: Offset(0, 10),
+                              blurRadius: 50,
+                              color: Color(0xffEEEEEE)),
+                        ],
+                      ),
+                      child: ListTile(
+                        title: Text('Title:'),
+                        trailing: Row(
+                          children: [
+                          FlatButton(
+          child:  Text("Add"),
+          onPressed: () {
+            setState(() {
+              Text("Delete");
+            });
+          },
+        ),
+                          ],
+                        ),
+                        subtitle: Text('Subject:'),
+                        
+                        onTap: () {
+                         
+                        },
+                      ),
+                    );
+                  }
+                ),
 
-  static Friend fromMap(Map map) {
-    var name = map['name'];
-
-    return new Friend(
-      avatar: map['picture']['large'],
-      name: '${_capitalize(name['first'])} ${_capitalize(name['last'])}',
-      email: map['email'],
-      location: _capitalize(map['location']['state']),
+      ) ,
     );
-  }
-
-  static String _capitalize(String input) {
-    return input.substring(0, 1).toUpperCase() + input.substring(1);
   }
 }

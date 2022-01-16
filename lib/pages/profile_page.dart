@@ -2,11 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_login_ui/pages/friend.dart';
 import 'goals_page.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 import 'achievement_page.dart';
-import 'friendslist_page.dart';
 import 'registration_page.dart';
 
 class ProfilePage extends StatefulWidget{
@@ -124,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage>{
                 leading: Icon(Icons.verified_user_sharp, size: _drawerIconSize,color: Colors.black,),
                 title: Text('Friends Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => FriendsListPage()), );
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => FriendPage()), );
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),

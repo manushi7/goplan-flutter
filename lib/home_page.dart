@@ -6,11 +6,29 @@ import 'package:flutter_login_ui/common/theme_helper.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:table_calendar/table_calendar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 
 import '../utils.dart';
 
-
+/*class VerticalSliderDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Vertical sliding carousel demo')),
+      body: Container(
+          child: CarouselSlider(
+        options: CarouselOptions(
+          aspectRatio: 2.0,
+          enlargeCenterPage: true,
+          scrollDirection: Axis.vertical,
+          autoPlay: true,
+        ),
+        items: imageSliders,
+      )),
+    );
+  }
+}*/
 
 class HomePage extends StatefulWidget{
   const HomePage({Key? key}): super(key:key);
@@ -107,7 +125,7 @@ class _HomePageState extends State<HomePage>{
       ),
       
       
-      body: Column(
+     /* body: Column(
         children: [
           TableCalendar<Event>(
             firstDay: kFirstDay,
@@ -166,7 +184,7 @@ class _HomePageState extends State<HomePage>{
           ),
         ],
       ),
-      );
+      );*/
 
 //card view code down here
   body:Card(
@@ -179,8 +197,8 @@ class _HomePageState extends State<HomePage>{
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: Expanded(
-                      child:Image.asset("assets/images/shape_of_you.png"),
-                      flex:2 ,
+                      child:Image.asset("assets\lib\reward.png"),
+                      
                     ),
                   ),
                 ),
@@ -192,8 +210,8 @@ class _HomePageState extends State<HomePage>{
                         Expanded(
                           flex: 5,
                           child: ListTile(
-                            title: Text("Shape Of You"),
-                            subtitle: Text("Ed Sheeran"),
+                            title: Text("Reminders"),
+                            subtitle: Text("abc"),
                           ),
                         ),
                         Expanded(
@@ -202,13 +220,13 @@ class _HomePageState extends State<HomePage>{
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                child:Text("PLAY"),
+                                child:Text("done"),
                                 onPressed: ()
                                 {},
                               ),
                               SizedBox(width: 8,),
                               TextButton(
-                                child: Text("ADD TO QUEUE"),
+                                child: Text("cancel"),
                                 onPressed: (){},
                               ),
                               SizedBox(width: 8,)
@@ -225,15 +243,15 @@ class _HomePageState extends State<HomePage>{
           ),
           elevation: 8,
           margin: EdgeInsets.all(10),
-        );
+        ));
     
   }
 }
 
   
 
-  @override
-  Widget build(BuildContext context) {
+@override
+Widget build(BuildContext context) {
 
     var _selectedIndex;
     return Scaffold(

@@ -5,12 +5,13 @@ import 'package:flutter_login_ui/common/theme_helper.dart';
 import 'package:flutter_login_ui/core/services/apiService.dart';
 import 'package:flutter_login_ui/models/userModel.dart';
 import 'package:flutter_login_ui/models/jwtResponseModel.dart';
-import 'package:flutter_alert/flutter_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'forgot_password_page.dart';
 import 'profile_page.dart';
 import 'registration_page.dart';
 import 'widgets/header_widget.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_login_ui/home_page.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
@@ -145,8 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 builder: (context) =>
                                                     ProfilePage()));
                                       } else {
-                                        showAlert(
-                                            context: context, title: data.msg);
+                                        Alert(context: context, title: "ERROR", desc: data.msg).show();
                                       }
                                       ;
                                     });
@@ -185,5 +185,38 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+    
   }
+  void showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("you have logged in successfully"),
+    onPressed: () {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomePage()));
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text(
+      "wrong username or password",
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    content: const Text("please put correct credentials"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
 }
