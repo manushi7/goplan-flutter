@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/common/theme_helper.dart';
-import 'package:flutter_login_ui/core/services/apiService.dart';
+import 'package:flutter_login_ui/config.dart';
 import 'package:flutter_login_ui/home_page.dart';
-import 'package:flutter_login_ui/models/userModel.dart';
-import 'package:flutter_login_ui/models/jwtResponseModel.dart';
-import 'package:flutter_alert/flutter_alert.dart';
+import 'package:flutter_login_ui/models/login_request_model.dart';
+import 'package:flutter_login_ui/services/api_service.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'forgot_password_page.dart';
 import 'profile_page.dart';
@@ -25,9 +25,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _isLoading = false;
   double _headerHeight = 250;
-  Key _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
 
@@ -36,36 +35,6 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-  }
-
-  signIn(String email, pass) async {
-    print("Catchhh");
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map data = {'email': email, 'password': pass};
-    var jsonResponse = null;
-
-    var response = await http.post(
-        Uri.parse("https://go-plan.herokuapp.com/api/user/login"),
-        body: data);
-    print(response);
-    if (response.statusCode == 201) {
-      jsonResponse = json.decode(response.body);
-      if (response.statusCode == 201) {
-        setState(() {
-          _isLoading = false;
-        });
-        print(jsonResponse['access_token']);
-        sharedPreferences.setString(
-            "token", 'Bearer' + ' ' + jsonResponse['access_token']);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ProfilePage()));
-      }
-    } else {
-      setState(() {
-        _isLoading = false;
-      });
-      print(response.body);
-    }
   }
 
   @override
@@ -144,33 +113,78 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               Container(
-                                decoration:
-                                    ThemeHelper().buttonBoxDecoration(context),
-                                child: ElevatedButton(
-                                  style: ThemeHelper().buttonStyle(),
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(40, 10, 40, 10),
-                                    child: Text(
-                                      'Sign In'.toUpperCase(),
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                  onPressed: _emailController.text == "" ||
-                                          _passwordController.text == ""
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            _isLoading = true;
+                                  decoration: ThemeHelper()
+                                      .buttonBoxDecoration(context),
+                                  child: ElevatedButton(
+                                      style: ThemeHelper().buttonStyle(),
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(40, 10, 40, 10),
+                                        child: Text(
+                                          'Sign In'.toUpperCase(),
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          LoginRequestModel model =
+                                              LoginRequestModel(
+                                                  email: _emailController.text,
+                                                  password:
+                                                      _passwordController.text);
+                                          APIService.login(model)
+                                              .then((response) {
+                                            if (response) {
+                                              Navigator.pushNamedAndRemoveUntil(
+                                                  context,
+                                                  '/profile',
+                                                  (route) => false);
+                                            } else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          Text(Config.appName),
+                                                      content: Text(
+                                                          "Error email or password"),
+                                                      actions: [
+                                                        FlatButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Text("OK"))
+                                                      ],
+                                                    );
+                                                  });
+                                            }
                                           });
-                                          signIn(_emailController.text,
-                                              _passwordController.text);
-                                        },
-                                ),
-                              ),
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text(Config.appName),
+                                                  content: Text(
+                                                      "Please fill all the fields"),
+                                                  actions: [
+                                                    FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text("OK"))
+                                                  ],
+                                                );
+                                              });
+                                        }
+                                      })),
                               Container(
                                 margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
                                 //child: Text('Don\'t have an account? Create'),

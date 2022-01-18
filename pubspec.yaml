@@ -39,6 +39,9 @@ dependencies:
   flutter_alert: ^0.4.0
   shared_preferences: ^2.0.11
   rflutter_alert: ^2.0.4
+  api_cache_manager: ^1.0.2
+  snippet_coder_utils: ^1.0.9
+  syncfusion_flutter_calendar: ^19.4.43
   
 
 

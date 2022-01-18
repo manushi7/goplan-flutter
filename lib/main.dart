@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/home_page.dart';
+import 'package:flutter_login_ui/pages/goals_page.dart';
+import 'package:flutter_login_ui/services/api_service.dart';
+import 'pages/login_page.dart';
+import 'package:flutter_login_ui/pages/profile_page.dart';
+import 'package:flutter_login_ui/pages/registration_page.dart';
+import 'package:flutter_login_ui/services/shared_service.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'pages/splash_screen.dart';
 
-void main() {
+Widget _defaultHome = const LoginPage();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  bool _result = await APIService.validateToken();
+  if (_result) {
+    _defaultHome = const ProfilePage();
+  }
   runApp(LoginUiApp());
 }
 
 class LoginUiApp extends StatelessWidget {
-
   Color _primaryColor = HexColor('#DC54FE');
   Color _accentColor = HexColor('#5AD3BC');
 
@@ -35,9 +48,13 @@ class LoginUiApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey.shade100,
         primarySwatch: Colors.grey,
       ),
-      home: SplashScreen(title: 'Go Plan'),
+      routes: {
+        '/': (context) => _defaultHome,
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegistrationPage(),
+        '/profile': (context) => const ProfilePage(),
+        '/goals': (context) => const Goal()
+      },
     );
   }
 }
-
-
