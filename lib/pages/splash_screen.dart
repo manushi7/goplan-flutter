@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/common/theme_helper.dart';
 
 import 'login_page.dart';
 
@@ -36,6 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  // ignore: dead_code
   Widget build(BuildContext context) {
 
     return Container(
@@ -56,11 +58,13 @@ class _SplashScreenState extends State<SplashScreen> {
             height: 140.0,
             width: 140.0,
             child: Center(
-              child: ClipOval(
-                //child: Icon(Icons.android_outlined, size: 128,), //put your logo here
+              child:CircleAvatar(
+                child: Text('Go Plan'),
+                
+                 //put your logo here
               ),
             ),
-            decoration: BoxDecoration(
+            /*decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
               boxShadow: [
@@ -69,12 +73,16 @@ class _SplashScreenState extends State<SplashScreen> {
                   blurRadius: 2.0,
                   offset: Offset(5.0, 3.0),
                   spreadRadius: 2.0,
+                  
                 )
               ]
-            ),
+              
+            ),*/
+            
+          ),),
           ),
-        ),
-      ),
-    );
+        );
+      
+  
   }
 }

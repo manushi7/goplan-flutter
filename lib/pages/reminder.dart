@@ -32,6 +32,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
         elevation: 0,
         brightness: Brightness.light,
         backgroundColor: Colors.white,
+        foregroundColor: Colors.lightBlue,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

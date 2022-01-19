@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/pages/achievement_page.dart';
+import 'package:flutter_login_ui/pages/bottom_nav_screen.dart';
 import 'package:flutter_login_ui/pages/friend.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
+import 'package:flutter_login_ui/pages/profile_page.dart';
 import 'package:flutter_login_ui/pages/registration_page.dart';
+import 'package:flutter_login_ui/pages/reminder.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -72,15 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
-                title: Text('Registration Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text('My Profile',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Colors.black,),
-                title: Text(' my achievements',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text(' My achievements',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
                   Navigator.push( context, MaterialPageRoute(builder: (context) => CardDesign()),);
                 },
@@ -88,9 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.verified_user_sharp, size: _drawerIconSize,color: Colors.black,),
-                title: Text('Friends Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text('My Reminders',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => FriendPage()), );
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => ReminderScreen()), );
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
@@ -105,6 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      appBar: AppBar(title: Text('home'),),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -182,11 +186,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              child: const Text('This is remonder'),
+              child: const Text('This is reminder'),
             ),
           ],
         ),
       ),
+      
     );
   }
 }

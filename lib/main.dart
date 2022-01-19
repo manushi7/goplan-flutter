@@ -37,7 +37,10 @@ class LoginUiApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey.shade100,
         primarySwatch: Colors.grey,
       ),
-      home: const BottomNavScreen(),
+      
+      home: const BottomNavScreen()
+       
+      
     
     );
   }
