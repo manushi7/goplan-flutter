@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ProfilePage()));
+                                                    HomeScreen()));
                                       } else {
                                         Alert(context: context, title: "ERROR", desc: data.msg).show();
                                       }

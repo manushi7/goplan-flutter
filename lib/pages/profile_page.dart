@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/pages/friend.dart';
+import 'package:flutter_login_ui/pages/reminder.dart';
 import 'goals_page.dart';
 import '../home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
@@ -106,9 +107,9 @@ class _ProfilePageState extends State<ProfilePage>{
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
-                title: Text('Registration Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text('Create your reminder',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ReminderScreen()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),

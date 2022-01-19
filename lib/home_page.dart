@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_login_ui/pages/achievement_page.dart';
+import 'package:flutter_login_ui/pages/friend.dart';
+import 'package:flutter_login_ui/pages/goals_page.dart';
+import 'package:flutter_login_ui/pages/registration_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -11,6 +16,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final PageController _controller;
+   double  _drawerIconSize = 24;
+  double _drawerFontSize = 17;
+  
   @override
   void initState() {
     _controller = PageController();
@@ -21,6 +29,82 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+         drawer: Drawer(
+        child: Container(
+          decoration:BoxDecoration(
+            color: Colors.white,
+              
+          ) ,
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    stops: [0.0, 1.0],
+                    colors: [ Theme.of(context).primaryColor,Theme.of(context).accentColor,],
+                  ),
+                ),
+                child: Container(
+                  alignment: Alignment.bottomLeft,
+                  child: Text("Your Go Plans",
+                    style: TextStyle(fontSize: 25,color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Colors.black,),
+                title: Text('Home Page', style: TextStyle(fontSize: 17, color: Colors.black),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.login_rounded,size: _drawerIconSize,color: Colors.black),
+                title: Text('my goals', style: TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => GoalScreen()),);
+                },
+              ),
+              //Divider(color: Theme.of(context).primaryColor, height: 1,),
+              ListTile(
+                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
+                title: Text('Registration Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
+                },
+              ),
+              //Divider(color: Theme.of(context).primaryColor, height: 1,),
+              ListTile(
+                leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Colors.black,),
+                title: Text(' my achievements',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                onTap: () {
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => CardDesign()),);
+                },
+              ),
+              //Divider(color: Theme.of(context).primaryColor, height: 1,),
+              ListTile(
+                leading: Icon(Icons.verified_user_sharp, size: _drawerIconSize,color: Colors.black,),
+                title: Text('Friends Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                onTap: () {
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => FriendPage()), );
+                },
+              ),
+              //Divider(color: Theme.of(context).primaryColor, height: 1,),
+              ListTile(
+                leading: Icon(Icons.logout_rounded, size: _drawerIconSize,color: Colors.black,),
+                title: Text('Logout',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                onTap: () {
+                  SystemNavigator.pop();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
