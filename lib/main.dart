@@ -13,10 +13,11 @@ import 'pages/splash_screen.dart';
 Widget _defaultHome = const LoginPage();
 
 void main() async {
-  print("Heee");
+  print("Heeeeeee");
 
   WidgetsFlutterBinding.ensureInitialized();
   bool _result = await APIService.validateToken();
+  print(_result);
   if (_result) {
     print("Heee");
     _defaultHome = const ProfilePage();

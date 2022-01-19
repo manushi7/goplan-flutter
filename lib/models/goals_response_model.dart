@@ -1,27 +1,30 @@
 import 'dart:convert';
 
-GoalsResponseModel goalResponseJson(String str) =>
-    GoalsResponseModel.fromJson(json.decode(str));
+import 'package:flutter_login_ui/models/goals_request_model.dart';
+
+List<GoalsResponseModel> goalResponseJson(String str) =>
+    List<GoalsResponseModel>.from(
+        json.decode(str).map((x) => GoalsResponseModel.fromJson(x)));
 
 class GoalsResponseModel {
   GoalsResponseModel({
-    required this.id,
-    required this.goalTitle,
-    required this.goalDescription,
-    required this.createDate,
-    required this.startDate,
-    required this.toCompleteDate,
-    required this.toSetReminder,
-    required this.userId,
+    this.id,
+    this.goalTitle,
+    this.goalDescription,
+    this.createDate,
+    this.startDate,
+    this.toCompleteDate,
+    this.toSetReminder,
+    this.userId,
   });
-  late final int id;
-  late final String goalTitle;
-  late final String goalDescription;
-  late final String createDate;
-  late final String startDate;
-  late final String toCompleteDate;
-  late final bool toSetReminder;
-  late final int userId;
+  late final int? id;
+  late final String? goalTitle;
+  late final String? goalDescription;
+  late final String? createDate;
+  late final String? startDate;
+  late final String? toCompleteDate;
+  late final bool? toSetReminder;
+  late final int? userId;
 
   GoalsResponseModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
