@@ -65,7 +65,7 @@ class APIService {
     print(loginDetails!.accessToken);
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+      'Authorization': 'Bearer ${loginDetails.accessToken}'
     };
 
     var url = Uri.http(Config.apiURL, Config.profileAPI);

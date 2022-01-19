@@ -13,9 +13,12 @@ import 'pages/splash_screen.dart';
 Widget _defaultHome = const LoginPage();
 
 void main() async {
+  print("Heee");
+
   WidgetsFlutterBinding.ensureInitialized();
   bool _result = await APIService.validateToken();
   if (_result) {
+    print("Heee");
     _defaultHome = const ProfilePage();
   }
   runApp(LoginUiApp());
@@ -49,7 +52,7 @@ class LoginUiApp extends StatelessWidget {
         primarySwatch: Colors.grey,
       ),
       routes: {
-        '/': (context) => _defaultHome,
+        '/': (context) => const LoginPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
         '/profile': (context) => const ProfilePage(),
