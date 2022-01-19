@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_ui/pages/bottom_nav_screen.dart';
 import 'package:flutter_login_ui/pages/friend.dart';
 import 'package:flutter_login_ui/pages/splash_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -36,7 +37,8 @@ class LoginUiApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey.shade100,
         primarySwatch: Colors.grey,
       ),
-      home: SplashScreen(title: 'welcome goplanners!',),
+      home: const BottomNavScreen(),
+    
     );
   }
 }

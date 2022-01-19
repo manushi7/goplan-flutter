@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_login_ui/pages/profile_page.dart';
 import 'achievement_page.dart';
-import 'reminder.dart';
+import 'friend.dart';
 import 'goals_page.dart';
 import '../home_page.dart';
 import 'settings.dart';
+import 'reminder.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     index = 0;
     _screens = const [
       HomeScreen(),
-      ReminderScreen(),
+      FriendPage(),
       GoalScreen(),
       Settings(),
     ];
@@ -76,9 +78,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
-                title: Text('Registration Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text('your profile',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
