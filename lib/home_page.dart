@@ -4,6 +4,7 @@ import 'package:flutter_login_ui/pages/achievement_page.dart';
 import 'package:flutter_login_ui/pages/bottom_nav_screen.dart';
 import 'package:flutter_login_ui/pages/friend.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
+import 'package:flutter_login_ui/pages/note.dart';
 import 'package:flutter_login_ui/pages/profile_page.dart';
 import 'package:flutter_login_ui/pages/registration_page.dart';
 import 'package:flutter_login_ui/pages/reminder.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-         drawer: Drawer(
+         /*drawer: Drawer(
         child: Container(
           decoration:BoxDecoration(
             color: Colors.white,
@@ -59,9 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Colors.black,),
-                title: Text('Home Page', style: TextStyle(fontSize: 17, color: Colors.black),),
+                title: Text('Add notes', style: TextStyle(fontSize: 17, color: Colors.black),),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => NoteScreen()));
                 },
               ),
               ListTile(
@@ -107,8 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-      ),
-      appBar: AppBar(title: Text('home'),),
+      ),*/
+      
       body: SingleChildScrollView(
         child: Column(
           children: [

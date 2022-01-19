@@ -5,6 +5,7 @@ import 'achievement_page.dart';
 import 'friend.dart';
 import 'goals_page.dart';
 import '../home_page.dart';
+import 'note.dart';
 import 'settings.dart';
 import 'reminder.dart';
 
@@ -38,6 +39,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Hello Manushi'),
+        backgroundColor: Colors.lightBlueAccent,
       ),
        drawer: Drawer(
         child: Container(
@@ -62,9 +64,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
               ),
               ListTile(
                 leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Colors.black,),
-                title: Text('Home Page', style: TextStyle(fontSize: 17, color: Colors.black),),
+                title: Text('add notes', style: TextStyle(fontSize: 17, color: Colors.black),),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => NoteScreen()));
                 },
               ),
               ListTile(
