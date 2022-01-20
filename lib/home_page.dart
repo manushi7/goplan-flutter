@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                       20, 10, 20, 10), // This will be the login form
                   child: userData()),
             ),
+            SafeArea(child: Container(child: goalsWidget()))
           ]),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -102,6 +103,30 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ));
+  }
+
+  Widget goalsWidget() {
+    return FutureBuilder(
+        future: APIService.getUserGoals(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print(snapshot.data[0].goalTitle);
+          if (snapshot.data != null) {
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                      contentPadding: const EdgeInsets.all(10),
+                      title: Text(snapshot.data[index].goalTitle),
+                      subtitle: Text(snapshot.data[index].goalDescription)),
+                );
+              },
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        });
   }
 
   Widget userData() {
