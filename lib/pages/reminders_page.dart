@@ -9,31 +9,25 @@ import 'package:flutter_login_ui/services/api_service.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class Goal extends StatefulWidget {
-  const Goal({Key? key}) : super(key: key);
+class Reminder extends StatefulWidget {
+  const Reminder({Key? key}) : super(key: key);
 
   @override
-  State<Goal> createState() => _GoalState();
+  State<Reminder> createState() => _ReminderState();
 }
 
-class _GoalState extends State<Goal> {
-  late final TextEditingController _titleController;
+class _ReminderState extends State<Reminder> {
+  late final TextEditingController reminderTitle;
+  late final TextEditingController createDate;
+  late final TextEditingController remindDate;
 
-  late final TextEditingController _descriptionController;
-  late final TextEditingController _createDateController;
-  late final TextEditingController _startDateController;
-  late final TextEditingController _completeDateController;
-  late final TextEditingController _reminderDateController;
   late bool setReminder;
   @override
   void initState() {
     setReminder = false;
-    _descriptionController = TextEditingController();
-    _createDateController = TextEditingController();
-    _startDateController = TextEditingController();
-    _completeDateController = TextEditingController();
-    _reminderDateController = TextEditingController();
-    _titleController = TextEditingController();
+    reminderTitle = TextEditingController();
+    createDate = TextEditingController();
+    remindDate = TextEditingController();
     super.initState();
   }
 
@@ -95,23 +89,15 @@ class _GoalState extends State<Goal> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                  controller: _titleController,
+                  controller: reminderTitle,
                   decoration:
-                      const InputDecoration(hintText: 'Enter goal title'),
+                      const InputDecoration(hintText: 'Enter reminder title'),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                  controller: _descriptionController,
-                  decoration:
-                      const InputDecoration(hintText: 'Enter description'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                    controller: _createDateController,
+                    controller: createDate,
                     decoration: InputDecoration(
                         icon: Icon(Icons.calendar_today),
                         labelText: "Enter Create Date"),
@@ -124,7 +110,7 @@ class _GoalState extends State<Goal> {
                           lastDate: DateTime(2101));
                       if (pickedDate != null) {
                         setState(() {
-                          _createDateController.text =
+                          createDate.text =
                               DateFormat('yyyy-MM-dd').format(pickedDate);
                         });
                       }
@@ -133,7 +119,7 @@ class _GoalState extends State<Goal> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                    controller: _startDateController,
+                    controller: remindDate,
                     decoration: InputDecoration(
                         icon: Icon(Icons.calendar_today),
                         labelText: "Enter Start Date"),
@@ -146,51 +132,7 @@ class _GoalState extends State<Goal> {
                           lastDate: DateTime(2101));
                       if (pickedDate != null) {
                         setState(() {
-                          _startDateController.text =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                        });
-                      }
-                    }),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                    controller: _completeDateController,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.calendar_today),
-                        labelText: "Enter to complete Date"),
-                    readOnly: true,
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2101));
-                      if (pickedDate != null) {
-                        setState(() {
-                          _completeDateController.text =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                        });
-                      }
-                    }),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                    controller: _reminderDateController,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.calendar_today),
-                        labelText: "Enter Reminder Date"),
-                    readOnly: true,
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2101));
-                      if (pickedDate != null) {
-                        setState(() {
-                          _reminderDateController.text =
+                          remindDate.text =
                               DateFormat('yyyy-MM-dd').format(pickedDate);
                         });
                       }

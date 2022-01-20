@@ -5,4 +5,5 @@ class Config {
   static const String registerAPI = "/api/user/register";
   static const String profileAPI = "/api/user/profile";
   static const String goalsAPI = "/api/goals";
+  static const String createGoalsAPI = "/api/goals/create";
 }

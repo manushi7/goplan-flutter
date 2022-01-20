@@ -9,7 +9,6 @@ import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/models/login_request_model.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'forgot_password_page.dart';
 import 'profile_page.dart';
 import 'registration_page.dart';

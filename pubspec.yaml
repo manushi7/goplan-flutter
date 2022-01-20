@@ -36,12 +36,13 @@ dependencies:
   google_sign_in: ^5.2.1
   get: ^4.6.1
   http: ^0.13.4
-  flutter_alert: ^0.4.0
   shared_preferences: ^2.0.11
   rflutter_alert: ^2.0.4
   api_cache_manager: ^1.0.2
   snippet_coder_utils: ^1.0.9
   syncfusion_flutter_calendar: ^19.4.43
+  flutter_otp: ^0.3.2
+  intl: ^0.17.0
   
 
 

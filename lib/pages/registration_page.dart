@@ -6,7 +6,6 @@ import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../config.dart';
 import 'profile_page.dart';
 

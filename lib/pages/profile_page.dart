@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_login_ui/models/userprofile_response_model.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/login_page.dart';
@@ -231,10 +232,133 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget userProfile() {
     return FutureBuilder(
       future: APIService.getUserProfile(),
-      builder: (BuildContext context, AsyncSnapshot<String> model) {
+      builder: (BuildContext context,
+          AsyncSnapshot<UserprofileResponseModel> model) {
         if (model.hasData) {
-          print(model.data);
-          return Center(child: Text(model.data!));
+          return SingleChildScrollView(
+            child: Stack(
+              children: [
+                Container(
+                  height: 100,
+                  child: HeaderWidget(100, false, Icons.house_rounded),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.fromLTRB(25, 10, 25, 10),
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(width: 5, color: Colors.white),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 100,
+                              offset: const Offset(5, 5),
+                            ),
+                          ],
+                        ),
+                        child: Icon(
+                          Icons.person,
+                          size: 80,
+                          color: Colors.grey.shade300,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        model.data!.fullName,
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'student',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, bottom: 4.0),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "User Information",
+                                style: TextStyle(
+                                  color: Colors.indigoAccent,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 25,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            Card(
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        ...ListTile.divideTiles(
+                                          color: Colors.grey,
+                                          tiles: [
+                                            ListTile(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 12,
+                                                      vertical: 4),
+                                              leading: Icon(Icons.my_location),
+                                              title: Text("EmployementStatus"),
+                                              subtitle: Text(
+                                                  model.data!.employmentStatus),
+                                            ),
+                                            ListTile(
+                                              leading: Icon(Icons.email),
+                                              title: Text("Email"),
+                                              subtitle: Text(model.data!.email),
+                                            ),
+                                            ListTile(
+                                              leading: Icon(Icons.phone),
+                                              title: Text("Phone"),
+                                              subtitle:
+                                                  Text(model.data!.phoneNumber),
+                                            ),
+                                            ListTile(
+                                              leading: Icon(Icons.person),
+                                              title: Text("Date of Birth"),
+                                              subtitle: Text(model.data!.dob),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
         }
         return const Center(
           child: CircularProgressIndicator(),

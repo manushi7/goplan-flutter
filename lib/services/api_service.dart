@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter_login_ui/config.dart';
+import 'package:flutter_login_ui/models/goals_request_model.dart';
 import 'package:flutter_login_ui/models/goals_response_model.dart';
 import 'package:flutter_login_ui/models/login_request_model.dart';
 import 'package:flutter_login_ui/models/login_response_model.dart';
 import 'package:flutter_login_ui/models/register_request_model.dart';
+import 'package:flutter_login_ui/models/userprofile_response_model.dart';
 import 'package:flutter_login_ui/services/shared_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,7 +67,7 @@ class APIService {
     }
   }
 
-  static Future<String> getUserProfile() async {
+  static Future<UserprofileResponseModel> getUserProfile() async {
     var loginDetails = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
@@ -79,12 +81,7 @@ class APIService {
       headers: requestHeaders,
     );
     print(response.body);
-
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      return "";
-    }
+    return userProfileResponseJson(response.body);
   }
 
   static Future<List<GoalsResponseModel>> getUserGoals() async {
@@ -104,5 +101,22 @@ class APIService {
       return goalResponseJson(response.body);
     }
     return [];
+  }
+
+  static Future<bool> createGoal(GoalsRequestModel model) async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+    };
+    var url = Uri.http(Config.apiURL, Config.createGoalsAPI);
+    var response = await client.post(url,
+        headers: requestHeaders, body: jsonEncode(model.toJson()));
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
