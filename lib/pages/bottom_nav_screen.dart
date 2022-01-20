@@ -26,7 +26,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     super.initState();
     index = 0;
     _screens =  [
-      HomePage(),
+      HomeScreen(),
       FriendPage(),
       Goal(),
       SettingsPage(),
