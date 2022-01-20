@@ -6,4 +6,5 @@ class Config {
   static const String profileAPI = "/api/user/profile";
   static const String goalsAPI = "/api/goals";
   static const String createGoalsAPI = "/api/goals/create";
+  static const String createReminderAPI = "/api/reminders/create";
 }

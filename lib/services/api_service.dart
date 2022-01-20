@@ -6,6 +6,7 @@ import 'package:flutter_login_ui/models/goals_response_model.dart';
 import 'package:flutter_login_ui/models/login_request_model.dart';
 import 'package:flutter_login_ui/models/login_response_model.dart';
 import 'package:flutter_login_ui/models/register_request_model.dart';
+import 'package:flutter_login_ui/models/reminder_request_model.dart';
 import 'package:flutter_login_ui/models/userprofile_response_model.dart';
 import 'package:flutter_login_ui/services/shared_service.dart';
 import 'package:http/http.dart' as http;
@@ -106,6 +107,22 @@ class APIService {
   static Future<bool> createGoal(GoalsRequestModel model) async {
     var loginDetails = await SharedService.loginDetails();
 
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+    };
+    var url = Uri.http(Config.apiURL, Config.createGoalsAPI);
+    var response = await client.post(url,
+        headers: requestHeaders, body: jsonEncode(model.toJson()));
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<bool> createReminder(ReminderRequestModel model) async {
+    var loginDetails = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${loginDetails!.accessToken}'

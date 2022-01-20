@@ -5,6 +5,7 @@ import 'package:flutter_login_ui/common/theme_helper.dart';
 import 'package:flutter_login_ui/config.dart';
 import 'package:flutter_login_ui/models/goals_request_model.dart';
 import 'package:flutter_login_ui/models/goals_response_model.dart';
+import 'package:flutter_login_ui/models/reminder_request_model.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -153,26 +154,21 @@ class _ReminderState extends State<Reminder> {
                     ),
                   ),
                   onPressed: () {
-                    if (_titleController.text != "" &&
-                        _descriptionController.text != "" &&
-                        _createDateController.text != "" &&
-                        _startDateController.text != "" &&
-                        _completeDateController.text != "") {
-                      GoalsRequestModel model = GoalsRequestModel(
-                          goalTitle: _titleController.text,
-                          goalDescription: _descriptionController.text,
-                          createDate: _createDateController.text,
-                          startDate: _startDateController.text,
-                          toCompleteDate: _completeDateController.text,
-                          toSetReminder: false);
-                      APIService.createGoal(model).then((response) {
+                    if (reminderTitle.text != "" &&
+                        createDate.text != "" &&
+                        remindDate.text != "") {
+                      ReminderRequestModel model = ReminderRequestModel(
+                          reminderTitle: reminderTitle.text,
+                          createDate: createDate.text,
+                          remindDate: remindDate.text);
+                      APIService.createReminder(model).then((response) {
                         if (response) {
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text(Config.appName),
-                                  content: Text("Goals have been added"),
+                                  content: Text("Reminder have been added"),
                                   actions: [
                                     FlatButton(
                                         onPressed: () {

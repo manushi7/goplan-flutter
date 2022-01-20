@@ -4,7 +4,7 @@ import 'package:get/state_manager.dart';
 
 class GoalController extends GetxController {
   // ignore: deprecated_member_use
-  var goals = List<GoalsResponseModel>().obs;
+  var goals = GoalsResponseModel().obs;
 
   @override
   void onInit() {
