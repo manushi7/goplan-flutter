@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/pages/achievement_page.dart';
 import 'package:flutter_login_ui/pages/bottom_nav_screen.dart';
-import 'package:flutter_login_ui/pages/friend.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/pages/note.dart';
 import 'package:flutter_login_ui/pages/profile_page.dart';

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/pages/profile_page.dart';
 import 'achievement_page.dart';
-import 'friend.dart';
+import 'appblock/appblock.dart';
+import 'friends/friend.dart';
 import 'goals_page.dart';
 import '../home_page.dart';
 import 'note.dart';
@@ -25,7 +26,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   void initState() {
     super.initState();
     index = 0;
-    _screens = const [
+    _screens =  [
       HomeScreen(),
       FriendPage(),
       GoalScreen(),
@@ -79,7 +80,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
-                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
+                leading: Icon(Icons.person, size: _drawerIconSize,color: Colors.black),
                 title: Text('your profile',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()),);
@@ -88,9 +89,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Colors.black,),
-                title: Text(' my achievements',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                title: Text(' my blocked apps',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => CardDesign()),);
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => appblock()),);
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
@@ -99,6 +100,14 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                 title: Text('create reminder',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
                   Navigator.push( context, MaterialPageRoute(builder: (context) => ReminderScreen()), );
+                },
+              ),
+
+              ListTile(
+                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black,),
+                title: Text('Friends Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                onTap: () {
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => FriendPage()), );
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),

@@ -2,12 +2,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_ui/pages/friend.dart';
+import 'package:flutter_login_ui/pages/friends/friend.dart';
 import 'package:flutter_login_ui/pages/reminder.dart';
+import 'appblock/appblock.dart';
 import 'goals_page.dart';
 import '../home_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 import 'achievement_page.dart';
+import 'note.dart';
 import 'registration_page.dart';
 
 class ProfilePage extends StatefulWidget{
@@ -91,9 +93,9 @@ class _ProfilePageState extends State<ProfilePage>{
               ),
               ListTile(
                 leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Colors.black,),
-                title: Text('Home Page', style: TextStyle(fontSize: 17, color: Colors.black),),
+                title: Text('add notes', style: TextStyle(fontSize: 17, color: Colors.black),),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => NoteScreen()));
                 },
               ),
               ListTile(
@@ -112,6 +114,14 @@ class _ProfilePageState extends State<ProfilePage>{
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ReminderScreen()),);
                 },
               ),
+
+              ListTile(
+                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black),
+                title: Text('my blocked apps',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => appblock()),);
+                },
+              ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Colors.black,),
@@ -122,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage>{
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
-                leading: Icon(Icons.verified_user_sharp, size: _drawerIconSize,color: Colors.black,),
+                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Colors.black,),
                 title: Text('Friends Page',style: TextStyle(fontSize: _drawerFontSize,color: Colors.black),),
                 onTap: () {
                   Navigator.push( context, MaterialPageRoute(builder: (context) => FriendPage()), );

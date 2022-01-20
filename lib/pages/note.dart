@@ -153,7 +153,7 @@ Widget inputFile({label, obscureText = false})
             )
         ),
       ),
-      SizedBox(height: 10,)
+      SizedBox(height: 20,)
     ],
   );
 }
