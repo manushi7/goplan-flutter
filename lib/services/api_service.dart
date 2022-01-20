@@ -5,8 +5,11 @@ import 'package:flutter_login_ui/models/goals_request_model.dart';
 import 'package:flutter_login_ui/models/goals_response_model.dart';
 import 'package:flutter_login_ui/models/login_request_model.dart';
 import 'package:flutter_login_ui/models/login_response_model.dart';
+import 'package:flutter_login_ui/models/notes_request_model.dart';
+import 'package:flutter_login_ui/models/notes_response_model.dart';
 import 'package:flutter_login_ui/models/register_request_model.dart';
 import 'package:flutter_login_ui/models/reminder_request_model.dart';
+import 'package:flutter_login_ui/models/reminder_response_model.dart';
 import 'package:flutter_login_ui/models/userprofile_response_model.dart';
 import 'package:flutter_login_ui/services/shared_service.dart';
 import 'package:http/http.dart' as http;
@@ -121,13 +124,28 @@ class APIService {
     }
   }
 
-  static Future<bool> createReminder(ReminderRequestModel model) async {
+  static Future<List<NotesResponseModel>> getUserNotes() async {
     var loginDetails = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${loginDetails!.accessToken}'
     };
-    var url = Uri.http(Config.apiURL, Config.createGoalsAPI);
+
+    var url = Uri.http(Config.apiURL, Config.notesAPI);
+    var response = await client.get(url, headers: requestHeaders);
+    if (response.statusCode == 200) {
+      return notesResponseJson(response.body);
+    }
+    return [];
+  }
+
+  static Future<bool> createNotes(NotesRequestModel model) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+    };
+    var url = Uri.http(Config.apiURL, Config.createNotesAPI);
     var response = await client.post(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));
     if (response.statusCode == 204) {
@@ -135,5 +153,36 @@ class APIService {
     } else {
       return false;
     }
+  }
+
+  static Future<bool> createReminder(ReminderRequestModel model) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+    };
+    var url = Uri.http(Config.apiURL, Config.createReminderAPI);
+    var response = await client.post(url,
+        headers: requestHeaders, body: jsonEncode(model.toJson()));
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<List<ReminderResponseModel>> getReminder() async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+    };
+    var url = Uri.http(Config.apiURL, Config.reminderAPI);
+    var response = await client.get(url, headers: requestHeaders);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return reminderResponseJson(response.body);
+    }
+    return [];
   }
 }

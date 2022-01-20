@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                                             if (response) {
                                               Navigator.pushNamedAndRemoveUntil(
                                                   context,
-                                                  '/profile',
+                                                  '/home',
                                                   (route) => false);
                                             } else {
                                               showDialog(

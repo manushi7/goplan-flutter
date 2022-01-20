@@ -6,6 +6,8 @@ import 'package:flutter_login_ui/models/userprofile_response_model.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/login_page.dart';
+import 'package:flutter_login_ui/pages/notes_page.dart';
+import 'package:flutter_login_ui/pages/reminders_page.dart';
 import 'package:flutter_login_ui/pages/widgets/header_widget.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
 import 'package:flutter_login_ui/services/shared_service.dart';
@@ -152,6 +154,37 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
+                leading: Icon(Icons.login_rounded,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Your Notes',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NotePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.login_rounded,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Your reminders',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Reminder()),
+                  );
+                },
+              ),
+
+              ListTile(
                 leading: Icon(Icons.person_add_alt_1,
                     size: _drawerIconSize, color: Colors.black),
                 title: Text(
@@ -186,25 +219,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
-              ListTile(
-                leading: Icon(
-                  Icons.verified_user_sharp,
-                  size: _drawerIconSize,
-                  color: Colors.black,
-                ),
-                title: Text(
-                  'Verification Page',
-                  style:
-                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ForgotPasswordVerificationPage()),
-                  );
-                },
-              ),
+
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(

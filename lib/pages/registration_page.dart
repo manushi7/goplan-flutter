@@ -260,7 +260,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                           );
                                         });
                                     Navigator.pushNamedAndRemoveUntil(
-                                        context, '/login', (route) => false);
+                                        context, '/verify', (route) => false);
                                   } else {
                                     showDialog(
                                         context: context,

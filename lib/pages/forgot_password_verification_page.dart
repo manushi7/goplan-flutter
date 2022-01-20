@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/common/theme_helper.dart';
+import 'package:flutter_login_ui/pages/login_page.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -11,10 +12,12 @@ class ForgotPasswordVerificationPage extends StatefulWidget {
   const ForgotPasswordVerificationPage({Key? key}) : super(key: key);
 
   @override
-  _ForgotPasswordVerificationPageState createState() => _ForgotPasswordVerificationPageState();
+  _ForgotPasswordVerificationPageState createState() =>
+      _ForgotPasswordVerificationPageState();
 }
 
-class _ForgotPasswordVerificationPageState extends State<ForgotPasswordVerificationPage> {
+class _ForgotPasswordVerificationPageState
+    extends State<ForgotPasswordVerificationPage> {
   final _formKey = GlobalKey<FormState>();
   bool _pinSuccess = false;
 
@@ -45,22 +48,23 @@ class _ForgotPasswordVerificationPageState extends State<ForgotPasswordVerificat
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Verification',
+                            Text(
+                              'Verification',
                               style: TextStyle(
                                   fontSize: 35,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black54
-                              ),
+                                  color: Colors.black54),
                               // textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Text(
                               'Enter the verification code we just sent you on your email address.',
                               style: TextStyle(
-                                // fontSize: 20,
+                                  // fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black54
-                              ),
+                                  color: Colors.black54),
                               // textAlign: TextAlign.center,
                             ),
                           ],
@@ -75,9 +79,7 @@ class _ForgotPasswordVerificationPageState extends State<ForgotPasswordVerificat
                               length: 4,
                               width: 300,
                               fieldWidth: 50,
-                              style: TextStyle(
-                                  fontSize: 30
-                              ),
+                              style: TextStyle(fontSize: 30),
                               textFieldAlignment: MainAxisAlignment.spaceAround,
                               fieldStyle: FieldStyle.underline,
                               onCompleted: (pin) {
@@ -103,7 +105,8 @@ class _ForgotPasswordVerificationPageState extends State<ForgotPasswordVerificat
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
-                                            return ThemeHelper().alartDialog("Successful",
+                                            return ThemeHelper().alartDialog(
+                                                "Successful",
                                                 "Verification code resend successful.",
                                                 context);
                                           },
@@ -111,38 +114,37 @@ class _ForgotPasswordVerificationPageState extends State<ForgotPasswordVerificat
                                       },
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.orange
-                                    ),
+                                        color: Colors.orange),
                                   ),
                                 ],
                               ),
                             ),
                             SizedBox(height: 40.0),
                             Container(
-                              decoration: _pinSuccess ? ThemeHelper().buttonBoxDecoration(context):ThemeHelper().buttonBoxDecoration(context, "#AAAAAA","#757575"),
+                              decoration: _pinSuccess
+                                  ? ThemeHelper().buttonBoxDecoration(context)
+                                  : ThemeHelper().buttonBoxDecoration(
+                                      context, "#AAAAAA", "#757575"),
                               child: ElevatedButton(
-                                style: ThemeHelper().buttonStyle(),
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      40, 10, 40, 10),
-                                  child: Text(
-                                    "Verify".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                                  style: ThemeHelper().buttonStyle(),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        40, 10, 40, 10),
+                                    child: Text(
+                                      "Verify".toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                onPressed: _pinSuccess ? () {
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) => ProfilePage()
-                                      ),
-                                          (Route<dynamic> route) => false
-                                  );
-                                } : null,
-                              ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()),
+                                        (Route<dynamic> route) => false);
+                                  }),
                             ),
                           ],
                         ),
@@ -153,7 +155,6 @@ class _ForgotPasswordVerificationPageState extends State<ForgotPasswordVerificat
               )
             ],
           ),
-        )
-    );
+        ));
   }
 }

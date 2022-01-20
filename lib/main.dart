@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/home_page.dart';
+import 'package:flutter_login_ui/pages/forgot_password_page.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
 import 'pages/login_page.dart';
@@ -19,7 +20,6 @@ void main() async {
   bool _result = await APIService.validateToken();
   print(_result);
   if (_result) {
-    print("Heee");
     _defaultHome = const ProfilePage();
   }
   runApp(LoginUiApp());
@@ -54,10 +54,12 @@ class LoginUiApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const LoginPage(),
+        '/home': (context) => const ProfilePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
         '/profile': (context) => const ProfilePage(),
-        '/goals': (context) => const Goal()
+        '/goals': (context) => const Goal(),
+        '/verify': (context) => const ForgotPasswordPage()
       },
     );
   }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-List<ReminderResponseModel> goalResponseJson(String str) =>
+List<ReminderResponseModel> reminderResponseJson(String str) =>
     List<ReminderResponseModel>.from(
         json.decode(str).map((x) => ReminderResponseModel.fromJson(x)));
 

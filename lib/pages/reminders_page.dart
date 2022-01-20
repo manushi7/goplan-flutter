@@ -52,10 +52,11 @@ class _ReminderState extends State<Reminder> {
   @override
   Widget calenderWidget(BuildContext context) {
     return FutureBuilder(
-        future: APIService.getUserGoals(),
+        future: APIService.getReminder(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print("fdf");
+          print(snapshot.data);
           if (snapshot.data != null) {
-            print(snapshot.data);
             return SafeArea(
                 child: Container(
                     child: SfCalendar(
@@ -64,7 +65,7 @@ class _ReminderState extends State<Reminder> {
                   appointmentDisplayMode:
                       MonthAppointmentDisplayMode.appointment),
               initialDisplayDate: DateTime.now(),
-              dataSource: GoalDataSource(snapshot.data),
+              dataSource: RemindersDataSource(snapshot.data),
             )));
           } else {
             return const Center(child: CircularProgressIndicator());
@@ -225,24 +226,24 @@ class _ReminderState extends State<Reminder> {
   }
 }
 
-class GoalDataSource extends CalendarDataSource {
-  GoalDataSource(List<GoalsResponseModel> goals) {
-    appointments = goals;
+class RemindersDataSource extends CalendarDataSource {
+  RemindersDataSource(List<RemindersDataSource> reminders) {
+    appointments = reminders;
   }
 
   @override
   DateTime getStartTime(int index) {
-    return DateTime.parse(appointments![index].startDate);
+    return DateTime.parse(appointments![index].createDate);
   }
 
   @override
   DateTime getEndTime(int index) {
-    return DateTime.parse(appointments![index].toCompleteDate);
+    return DateTime.parse(appointments![index].remindDate);
   }
 
   @override
   String getSubject(int index) {
-    return appointments![index].goalTitle as String;
+    return appointments![index].reminderTitle as String;
   }
 
   @override
@@ -252,6 +253,6 @@ class GoalDataSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return Colors.green;
+    return Colors.blue;
   }
 }
