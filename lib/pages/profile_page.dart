@@ -11,7 +11,9 @@ import 'package:flutter_login_ui/services/api_service.dart';
 import 'package:flutter_login_ui/services/shared_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'achievement_page.dart';
+import 'appblock/appblock.dart';
 import 'forgot_password_verification_page.dart';
+import 'friends/friend.dart';
 import 'settings.dart';
 import 'package:http/http.dart' as http;
 
@@ -152,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
-                leading: Icon(Icons.person_add_alt_1,
+                leading: Icon(Icons.settings,
                     size: _drawerIconSize, color: Colors.black),
                 title: Text(
                   'Settings ',
@@ -163,6 +165,38 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SettingsPage()),
+                  );
+                },
+              ),
+
+              ListTile(
+                leading: Icon(Icons.person_add_alt_1,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Add friends ',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FriendPage()),
+                  );
+                },
+              ),
+
+              ListTile(
+                leading: Icon(Icons.not_accessible,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Blocked Apps ',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => appblock()),
                   );
                 },
               ),
