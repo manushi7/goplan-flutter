@@ -8,12 +8,10 @@ import 'package:flutter_login_ui/config.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/models/login_request_model.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'forgot_password_page.dart';
 import 'profile_page.dart';
 import 'registration_page.dart';
 import 'widgets/header_widget.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {

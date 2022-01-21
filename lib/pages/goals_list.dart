@@ -8,14 +8,14 @@ import 'package:flutter_login_ui/models/notes_response_model.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
 import 'package:intl/intl.dart';
 
-class AchievementPage extends StatefulWidget {
-  const AchievementPage({Key? key}) : super(key: key);
+class GoalList extends StatefulWidget {
+  const GoalList({Key? key}) : super(key: key);
 
   @override
-  _AchievementPageState createState() => _AchievementPageState();
+  _GoalListState createState() => _GoalListState();
 }
 
-class _AchievementPageState extends State<AchievementPage> {
+class _GoalListState extends State<GoalList> {
   late final TextEditingController achievementStatus;
   @override
   void initState() {
@@ -23,9 +23,9 @@ class _AchievementPageState extends State<AchievementPage> {
     super.initState();
   }
 
-  Widget achievementWidget() {
+  Widget noteWidget() {
     return FutureBuilder(
-        future: APIService.getAchievements(),
+        future: APIService.getUserGoals(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.data != null) {
             return ListView.builder(
@@ -36,19 +36,18 @@ class _AchievementPageState extends State<AchievementPage> {
                     children: <Widget>[
                       ListTile(
                           contentPadding: const EdgeInsets.all(10),
-                          title: Text(snapshot.data[index].achievementStatus),
-                          subtitle:
-                              Text(snapshot.data[index].goal.goalDescription)),
+                          title: Text(snapshot.data[index].goalTitle),
+                          subtitle: Text(snapshot.data[index].goalDescription)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Text(snapshot.data[index].goal.startDate),
+                          Text(snapshot.data[index].startDate),
                           const SizedBox(width: 8),
                           TextButton(
                             style: TextButton.styleFrom(
                               primary: Colors.green,
                             ),
-                            child: const Text('DELETE'),
+                            child: const Text('COMPLETE'),
                             onPressed: () {
                               showSheet(context, snapshot.data[index].id);
                             },
@@ -75,8 +74,8 @@ class _AchievementPageState extends State<AchievementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Achievements')),
-      body: achievementWidget(),
+      appBar: AppBar(title: Text('Goals')),
+      body: noteWidget(),
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/home_page.dart';
 import 'package:flutter_login_ui/pages/forgot_password_page.dart';
+import 'package:flutter_login_ui/pages/forgot_password_verification_page.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/services/api_service.dart';
 import 'pages/login_page.dart';
@@ -59,7 +60,7 @@ class LoginUiApp extends StatelessWidget {
         '/register': (context) => const RegistrationPage(),
         '/profile': (context) => const ProfilePage(),
         '/goals': (context) => const Goal(),
-        '/verify': (context) => const ForgotPasswordPage()
+        '/verify': (context) => const ForgotPasswordVerificationPage()
       },
     );
   }

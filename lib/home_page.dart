@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_ui/common/theme_helper.dart';
+import 'package:flutter_login_ui/pages/goals_list.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
 import 'package:flutter_login_ui/pages/login_page.dart';
 import 'package:flutter_login_ui/pages/profile_page.dart';
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
 
     _screens = [
       HomePage(),
-      Goal(),
+      GoalList(),
       Reminder(),
       ProfilePage(),
     ];
@@ -111,6 +112,7 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           print(snapshot.data[0].goalTitle);
           if (snapshot.data != null) {
+            print(snapshot.data);
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {

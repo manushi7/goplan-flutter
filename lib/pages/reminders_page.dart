@@ -39,7 +39,7 @@ class _ReminderState extends State<Reminder> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: calenderWidget(context),
+      body: noteWidget(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add, color: Colors.white),
         onPressed: () {
@@ -49,26 +49,62 @@ class _ReminderState extends State<Reminder> {
     );
   }
 
-  @override
-  Widget calenderWidget(BuildContext context) {
+  Widget noteWidget() {
     return FutureBuilder(
         future: APIService.getReminder(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          print("fdf");
           print(snapshot.data);
           if (snapshot.data != null) {
-            return SafeArea(
-                child: Container(
-                    child: SfCalendar(
-              view: CalendarView.month,
-              monthViewSettings: MonthViewSettings(
-                  appointmentDisplayMode:
-                      MonthAppointmentDisplayMode.appointment),
-              initialDisplayDate: DateTime.now(),
-              dataSource: RemindersDataSource(snapshot.data),
-            )));
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ListTile(
+                          contentPadding: const EdgeInsets.all(10),
+                          title: Text(snapshot.data[index].reminderTitle),
+                          subtitle: Text(snapshot.data[index].remindDate)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(snapshot.data[index].startDate),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.green,
+                            ),
+                            child: const Text('DELETE'),
+                            onPressed: () {},
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                      ),
+                    ]);
+              },
+            );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              ListTile(
+                  contentPadding: const EdgeInsets.all(10),
+                  title: Text("Complete flutter project"),
+                  subtitle: Text("Submit project in time")),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text("2022-01-21"),
+                  const SizedBox(width: 8),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.green,
+                    ),
+                    child: const Text('DELETE'),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(width: 8),
+                ],
+              ),
+            ]);
           }
         });
   }
@@ -223,36 +259,5 @@ class _ReminderState extends State<Reminder> {
         );
       },
     );
-  }
-}
-
-class RemindersDataSource extends CalendarDataSource {
-  RemindersDataSource(List<RemindersDataSource> reminders) {
-    appointments = reminders;
-  }
-
-  @override
-  DateTime getStartTime(int index) {
-    return DateTime.parse(appointments![index].createDate);
-  }
-
-  @override
-  DateTime getEndTime(int index) {
-    return DateTime.parse(appointments![index].remindDate);
-  }
-
-  @override
-  String getSubject(int index) {
-    return appointments![index].reminderTitle as String;
-  }
-
-  @override
-  bool isAllDay(int index) {
-    return true;
-  }
-
-  @override
-  Color getColor(int index) {
-    return Colors.blue;
   }
 }

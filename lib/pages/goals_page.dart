@@ -60,7 +60,6 @@ class _GoalState extends State<Goal> {
         future: APIService.getUserGoals(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.data != null) {
-            print(snapshot.data);
             return SafeArea(
                 child: Container(
                     child: SfCalendar(

@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/models/userprofile_response_model.dart';
+import 'package:flutter_login_ui/pages/appblock/appblock.dart';
+import 'package:flutter_login_ui/pages/friends/friend.dart';
 import 'package:flutter_login_ui/pages/goals_page.dart';
-import 'package:flutter_login_ui/home_page.dart';
+import 'package:flutter_login_ui/pages/home_page.dart';
 import 'package:flutter_login_ui/pages/login_page.dart';
 import 'package:flutter_login_ui/pages/notes_page.dart';
 import 'package:flutter_login_ui/pages/reminders_page.dart';
@@ -134,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
               ),
               ListTile(
@@ -199,7 +201,37 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.person_add_alt_1,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Appblock ',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => appblock()),
+                  );
+                },
+              ),
               //Divider(color: Theme.of(context).primaryColor, height: 1,),
+              ListTile(
+                leading: Icon(Icons.person_add_alt_1,
+                    size: _drawerIconSize, color: Colors.black),
+                title: Text(
+                  'Friends ',
+                  style:
+                      TextStyle(fontSize: _drawerFontSize, color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FriendPage()),
+                  );
+                },
+              ),
               ListTile(
                 leading: Icon(
                   Icons.password_rounded,
@@ -214,7 +246,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CardDesign()),
+                    MaterialPageRoute(builder: (context) => AchievementPage()),
                   );
                 },
               ),

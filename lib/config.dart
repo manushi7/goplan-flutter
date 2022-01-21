@@ -10,4 +10,6 @@ class Config {
   static const String createReminderAPI = "/api/reminders/create";
   static const String notesAPI = "/api/notes";
   static const String createNotesAPI = "/api/notes/create";
+  static const String createAchievementAPI = "/api/achievements/create/";
+  static const String achievementAPI = "/api/achievements/";
 }

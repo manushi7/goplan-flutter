@@ -231,7 +231,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               ),
                             ),
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
+                              if (firstname.text != "" &&
+                                  lastname.text != "" &&
+                                  phoneNumber.text != "" &&
+                                  password.text != "") {
                                 RegisterRequestModel model =
                                     RegisterRequestModel(
                                         fullName:
@@ -280,23 +283,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                         });
                                   }
                                 });
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text(Config.appName),
+                                        content:
+                                            Text("Please fill all the fields."),
+                                        actions: [
+                                          FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("OK"))
+                                        ],
+                                      );
+                                    });
                               }
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text(Config.appName),
-                                      content:
-                                          Text("Please fill all the fields."),
-                                      actions: [
-                                        FlatButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text("OK"))
-                                      ],
-                                    );
-                                  });
                             },
                           ),
                         ),

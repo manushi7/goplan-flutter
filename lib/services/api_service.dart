@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_login_ui/config.dart';
+import 'package:flutter_login_ui/models/achievement_request_model.dart';
+import 'package:flutter_login_ui/models/achievement_response_model.dart';
 import 'package:flutter_login_ui/models/goals_request_model.dart';
 import 'package:flutter_login_ui/models/goals_response_model.dart';
 import 'package:flutter_login_ui/models/login_request_model.dart';
@@ -100,7 +102,6 @@ class APIService {
       url,
       headers: requestHeaders,
     );
-    print(response.body);
     if (response.statusCode == 200) {
       return goalResponseJson(response.body);
     }
@@ -155,6 +156,24 @@ class APIService {
     }
   }
 
+  static Future<bool> createAchievement(
+      AchievementRequestModel model, id) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+    };
+    var url =
+        Uri.parse("http://go-plan.herokuapp.com/api/achievements/create/${id}");
+    var response = await client.post(url,
+        headers: requestHeaders, body: jsonEncode(model.toJson()));
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static Future<bool> createReminder(ReminderRequestModel model) async {
     var loginDetails = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
@@ -179,9 +198,26 @@ class APIService {
     };
     var url = Uri.http(Config.apiURL, Config.reminderAPI);
     var response = await client.get(url, headers: requestHeaders);
-    print(response.statusCode);
     if (response.statusCode == 200) {
+      print(response.body);
+
       return reminderResponseJson(response.body);
+    }
+    return [];
+  }
+
+  static Future<List<AchievementResponseModel>> getAchievements() async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${loginDetails!.accessToken}'
+    };
+    var url = Uri.http(Config.apiURL, Config.achievementAPI);
+    var response = await client.get(url, headers: requestHeaders);
+    if (response.statusCode == 200) {
+      print(response.body);
+
+      return achievementResponseJson(response.body);
     }
     return [];
   }

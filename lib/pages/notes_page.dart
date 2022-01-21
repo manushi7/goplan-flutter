@@ -28,10 +28,6 @@ class _NotePageState extends State<NotePage> {
         future: APIService.getUserNotes(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.data != null) {
-            print(snapshot.data.length);
-            print("dfsfd");
-            print(snapshot.data[0].noteTitle);
-
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
